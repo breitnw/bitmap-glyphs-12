@@ -14,7 +14,6 @@
     flake-utils.lib.eachDefaultSystem (system: let
       pkgs = nixpkgs.legacyPackages.${system};
       cozette-font = cozette.packages.${system}.cozette;
-      bitsnpicas = cozette.packages.${system}.bitsnpicas-bin;
     in {
       packages = rec {
         cozette-patched = pkgs.stdenvNoCC.mkDerivation {
@@ -22,9 +21,8 @@
           version = "1.28.0";
           src = ./.;
           buildPhase = ''
-            cat header-patched.txt >> "BitmapGlyphsUnshifted.bdf"
-            sed '0,/^ENDPROPERTIES$/d' ${cozette-font}/share/fonts/misc/cozette.bdf >> "BitmapGlyphsUnshifted.bdf"
-            ${bitsnpicas}/bin/bitsnpicas convertbitmap -tx -1 -f bdf BitmapGlyphsUnshifted.bdf
+            cat header-patched.txt >> "BitmapGlyphs.bdf"
+            sed '0,/^ENDPROPERTIES$/d' ${cozette-font}/share/fonts/misc/cozette.bdf >> "BitmapGlyphs.bdf"
           '';
           installPhase = ''
             mkdir -p $out/share/fonts/misc
