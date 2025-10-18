@@ -6,11 +6,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1758415879,
-        "narHash": "sha256-IEHQZPt6LgQUssp8Uxf8W1QEeKDXqOlZufS+brRYWcU=",
+        "lastModified": 1760823957,
+        "narHash": "sha256-XkGL9bMIjxN0KKKPOBT+pbGo6RAitgPo0MVN1T/DXNM=",
         "owner": "breitnw",
         "repo": "cozette",
-        "rev": "7423e0885747b42fe58de2033e7501d916dea678",
+        "rev": "8c0b8d67ca77aac87f6642ddf490070995c31ddc",
         "type": "github"
       },
       "original": {
