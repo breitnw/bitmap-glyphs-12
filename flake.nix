@@ -1,7 +1,7 @@
 {
   description = "Cozette with modifications for use as a nerd/unicode font for Terminus";
 
-  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
   inputs.cozette.url = "github:breitnw/cozette/dev-updated";
   inputs.flake-utils.url = "github:numtide/flake-utils";
 
@@ -14,7 +14,6 @@
     flake-utils.lib.eachDefaultSystem (system: let
       pkgs = nixpkgs.legacyPackages.${system};
       cozette-font = cozette.packages.${system}.cozette;
-      bitsnpicas = cozette.packages.${system}.bitsnpicas-bin;
     in {
       packages = rec {
         cozette-patched = pkgs.stdenvNoCC.mkDerivation {
@@ -22,7 +21,7 @@
           version = "1.28.0";
           src = ./.;
           buildPhase = ''
-            ${bitsnpicas}/bin/bitsnpicas convertbitmap -tx -1 -f bdf ${cozette-font}/share/fonts/misc/cozette.bdf
+            ${pkgs.bitsnpicas}/bin/bitsnpicas convertbitmap -tx -1 -f bdf ${cozette-font}/share/fonts/misc/cozette.bdf
             cat header-patched.txt >> "BitmapGlyphs.bdf"
             sed '0,/^ENDPROPERTIES$/d' Cozette.bdf >> "BitmapGlyphs.bdf"
           '';
